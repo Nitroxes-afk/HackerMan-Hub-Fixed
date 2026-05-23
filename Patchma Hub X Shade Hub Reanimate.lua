@@ -543,17 +543,16 @@ lbl("by rqz")
 lbl("MyWorld was here")
 lbl("discord.gg/QMy5f6DrbH")
 
-local allowshiftlock=nil
-local ctrltp=nil
-local placeholders=nil
-local clickfling=nil
-local highlightflingtargets=nil
-local discharscripts=nil
-local flingchangestate=nil
-local respawntp=nil
-local breakjointsmethod=nil
-local simrad=false
-local hidedeatheffect=nil
+
+local allowshiftlock = true          -- true = on, false = off
+local ctrltp = false                 -- ctrl click tp
+local clickfling = true              -- click fling
+local placeholders = true            -- client sided placeholders
+local highlightflingtargets = false  -- highlight fling targets
+local simrad = true                  -- simulation radius
+local flingchangestate = 3           -- 3 = all, 1 = physics, 2 = disable sitting, 0 = none
+local respawntp = 0                  -- 0 = stay at spawn, 1 = random, 2 = behind, 3 = hide body
+local hidedeatheffect = true	
 
 local c=nil
 local cons={}
