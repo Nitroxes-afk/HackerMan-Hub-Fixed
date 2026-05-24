@@ -7314,7 +7314,7 @@ btn("Rami's Banisher V2", function()
 	local RightHip=getJoint("Right Hip")
 	local LeftHip=getJoint("Left Hip")
 	local Neck=getJoint("Neck")
-	local AccessoryWeld = getPartFromMesh(6774735978,6774736019)
+	local AccessoryWeld = getPartFromMesh(6774735978,6774736019,4615369575)
 	local AccessoryWeld = getPartJoint(AccessoryWeld)
 
 	t.setJumpPower(0)
@@ -8331,7 +8331,7 @@ btn("Pistol V4", function()
 	local RightHip=getJoint("Right Hip")
 	local LeftHip=getJoint("Left Hip")
 	local Neck=getJoint("Neck")
-	local AccessoryWeld = getPartFromMesh(11694171309,11694499896)
+	local AccessoryWeld = getPartFromMesh(11694171309,11694499896,4615369575)
 	local AccessoryWeld = getPartJoint(AccessoryWeld)
 
 	local function ShadeID(ID, Duration)
@@ -8578,7 +8578,7 @@ btn("Andrfix Studio Dummy", function()
 	local RightHip=getJoint("Right Hip")
 	local LeftHip=getJoint("Left Hip")
 	local Neck=getJoint("Neck")
-	local AccessoryWeld = getPartFromMesh(5164176566,5164167965)
+	local AccessoryWeld = getPartFromMesh(5164176566,5164167965,4615369575)
 	local AccessoryWeld = getPartJoint(AccessoryWeld)
 	local cframes=t.cframes
 	local rootpart1=t.getPart("HumanoidRootPart")
@@ -9356,7 +9356,7 @@ btn("Minigun", function()
 	local RightHip=getJoint("Right Hip")
 	local LeftHip=getJoint("Left Hip")
 	local Neck=getJoint("Neck")
-	local AccessoryWeld = getPartFromMesh(6774736084,6774736116)
+	local AccessoryWeld = getPartFromMesh(6774736084,6774736116,4615369575)
 	local AccessoryWeld = getPartJoint(AccessoryWeld)
 
 
@@ -19257,7 +19257,7 @@ btn("Shade Hub >>> MODDED <<< Gold Pistol V4", function()
 	local RightHip=getJoint("Right Hip")
 	local LeftHip=getJoint("Left Hip")
 	local Neck=getJoint("Neck")
-	local AccessoryWeld = getPartFromMesh(11711334005,11711339338)
+	local AccessoryWeld = getPartFromMesh(11711334005,11711339338,4615369575)
 	local AccessoryWeld = getPartJoint(AccessoryWeld)
 	local TestWeld = getPartFromMesh(4307568890,4307568951)
 	local TestWeld = getPartJoint(TestWeld)
@@ -22066,7 +22066,7 @@ game.StarterGui:SetCore("SendNotification", {
 	local RightHip=getJoint("Right Hip")
 	local LeftHip=getJoint("Left Hip")
 	local Neck=getJoint("Neck")
-	local HammerWeld = getPartFromMesh(14463205245,14463205530)
+	local HammerWeld = getPartFromMesh(15427253997,15548234085)
 	local HammerWeld = getPartJoint(HammerWeld)
 	local cframes=t.cframes
 	local rootpart1=t.getPart("HumanoidRootPart")
@@ -22330,19 +22330,42 @@ game.StarterGui:SetCore("SendNotification", {
 		modeEntered=function()
 			Hammer = true
 		end,
-		idle = function()
-			t.setWalkSpeed(24)
-			t.setJumpPower(125)
-			if attackAnimation then return attackAnimation() end
-			Neck.C0=Lerp(Neck.C0,cfMul(cf(0,1,0),angles(-1.3962634015954636,0,2.9670597283903604)),deltaTime) 
-			RootJoint.C0=Lerp(RootJoint.C0,angles(-1.7453292519943295,0,3.3161255787892263),deltaTime) 
-			HammerWeld.C0=Lerp(HammerWeld.C0,cfMul(cf(1,-1,-0.8),angles(0,-0.2617993877991494,-1.5707963267948966)),deltaTime) 
-			RightHip.C0=Lerp(RightHip.C0,cfMul(cf(1,-1,0),angles(0,1.5707963267948966,0.17453292519943295)),deltaTime) 
-			RightShoulder.C0=Lerp(RightShoulder.C0,cfMul(cf(1,0.3,0),angles(0,1.0471975511965976,3.6651914291880923)),deltaTime) 
-			LeftHip.C0=Lerp(LeftHip.C0,cfMul(cf(-1,-1,0),angles(0,-1.3962634015954636,0.17453292519943295)),deltaTime) 
-			LeftShoulder.C0=Lerp(LeftShoulder.C0,cfMul(cf(-1,0.5,0),angles(0,-1.5707963267948966,-0.17453292519943295)),deltaTime)
-			i2.StudsOffsetWorldSpace=cframes[rootpart].Position 
-		end,
+                idle = function()
+                                                               t.setWalkSpeed(24)
+                                                                t.setJumpPower(125)
+                                                                if attackAnimation then return attackAnimation() end
+
+                                                                 -- Right hand: grips the handle (arm raised, rotated inward)
+                                                                  RightShoulder.C0 = Lerp(RightShoulder.C0,
+        cfMul(cf(1, 0.5, 0), angles(1.5707963267948966, 1.5707963267948966, 0)),
+    deltaTime)
+
+    -- Left hand: reaches up to hold near the top (arm high, across body)
+    LeftShoulder.C0 = Lerp(LeftShoulder.C0,
+        cfMul(cf(-1, 0.5, -0.3), angles(2.0943951023931953, -1.2217304763960306, 0.5235987755982988)),
+    deltaTime)
+
+    -- Hammer: handle in right hand, head above left hand
+    -- positioned vertically between both arms
+    HammerWeld.C0 = Lerp(HammerWeld.C0,
+        cfMul(cf(0, -1.5, -0.5), angles(0, 0, 0)),
+    deltaTime)
+
+    Neck.C0 = Lerp(Neck.C0,
+        cfMul(cf(0, 1, 0), angles(-1.3962634015954636, 0, 2.9670597283903604)),
+    deltaTime)
+    RootJoint.C0 = Lerp(RootJoint.C0,
+        angles(-1.7453292519943295, 0, 3.3161255787892263),
+    deltaTime)
+    RightHip.C0 = Lerp(RightHip.C0,
+        cfMul(cf(1, -1, 0), angles(0, 1.5707963267948966, 0.17453292519943295)),
+    deltaTime)
+    LeftHip.C0 = Lerp(LeftHip.C0,
+        cfMul(cf(-1, -1, 0), angles(0, -1.3962634015954636, 0.17453292519943295)),
+    deltaTime)
+
+    i2.StudsOffsetWorldSpace = cframes[rootpart].Position
+end,
 		walk = function()
 			t.setWalkSpeed(24)
 			t.setJumpPower(125)
@@ -23486,116 +23509,49 @@ insSet(btn("stop current script",stopreanimate),"TextColor3",c3(0.75,0,0))
 
 lbl("SETTINGS (REANIMATE TO APPLY)")
 
-swtc("client sided placeholders",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	placeholders=v
-end)
+-- Default settings applied automatically
+placeholders = true
+highlightflingtargets = true
+allowshiftlock = true
+ctrltp = true
+clickfling = true
+flingchangestate = 0        -- none
+respawntp = 3               -- hide body
+discharscripts = true
+disguiscripts = true
+breakjointsmethod = 1       -- breakjoints + health
+hidedeatheffect = true
+simrad = true
 
-swtc("highlight fling targets",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	highlightflingtargets=v
-end)
+lbl("SETTINGS (REANIMATE TO APPLY)")
 
-swtc("allow shiftlock",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	allowshiftlock=v
-end)
+-- DEFAULT / AUTO SETTINGS
+placeholders = false           -- changed to false
+highlightflingtargets = true
+allowshiftlock = true
+ctrltp = true
+clickfling = false             -- changed to false
+flingchangestate = 0           -- none
+respawntp = 3                  -- hide body
+discharscripts = true
+disguiscripts = true
+breakjointsmethod = 3          -- changed to "breakjoints" only
+hidedeatheffect = true
+simrad = true
 
-swtc("ctrl click tp",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	ctrltp=v
-end)
-
-swtc("click fling",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	clickfling=v
-end)
-
-swtc("fling enhancements",{
-	{value=3,text="all"},
-	{value=1,text="changestate physics"},
-	{value=2,text="disable sitting"},
-	{value=0,text="none"},
-},function(v)
-	flingchangestate=v
-end)
-
-swtc("respawn tp",{
-	{value=3,text="hide body"},
-	{value=0,text="stay at spawn"},
-	{value=1,text="random tp close"},
-	{value=2,text="behind char"}
-},function(v)
-	respawntp=v
-end)
-
-local disguiscripts=nil
-swtc("new gui scripts",{
-	{value=true,text="disable"},
-	{value=false,text="keep"}
-},function(v)
-	disguiscripts=v
-end)
-Connect(insGet(pg,"DescendantAdded"),function(v)
-	if c and disguiscripts and IsA(v,"Script") then --mind Enum.RunContext.Client
-		insSet(v,"Disabled",true) 
-	end
-end)
-
-swtc("new character scripts",{
-	{value=function(v)
-		if IsA(v,"Script") then --mind Enum.RunContext.Client
-			insSet(v,"Disabled",true)
-		end
-	end,text="disable"},
-	{value=false,text="keep"}
-},function(v)
-	discharscripts=v
-end)
-
-if replicatesignal then
-	swtc("breakjoints",{
-		{value=4,text="serverbreakjoints"},
-		{value=1,text="breakjoints+health"},
-		{value=2,text="health or breakjoints"},
-		{value=3,text="breakjoints"}
-	},function(v)
-		breakjointsmethod=v
-	end)
-else
-	swtc("breakjoints",{
-		{value=1,text="breakjoints+health"},
-		{value=2,text="health or breakjoints"},
-		{value=3,text="breakjoints"}
-	},function(v)
-		breakjointsmethod=v
-	end)
-	lbl("serverbreakjoints unsupported")
-end
-
-swtc("coregui death effect",{
-	{value=true,text="disable"},
-	{value=false,text="dont modify"},
-},function(v)
-	hidedeatheffect=v
-end)
-
-swtc("set simulation radius",{
-	{value=true,text="yes"},
-	{value=false,text="no"},
-},function(v)
-	simrad=v
-end)
+-- Settings menu (with your new defaults selected)
+swtc("client sided placeholders",{ {value=false,text="no"}, {value=true,text="yes"} },function(v) placeholders=v end)
+swtc("highlight fling targets",{ {value=true,text="yes"}, {value=false,text="no"} },function(v) highlightflingtargets=v end)
+swtc("allow shiftlock",{ {value=true,text="yes"}, {value=false,text="no"} },function(v) allowshiftlock=v end)
+swtc("ctrl click tp",{ {value=true,text="yes"}, {value=false,text="no"} },function(v) ctrltp=v end)
+swtc("click fling",{ {value=false,text="no"}, {value=true,text="yes"} },function(v) clickfling=v end)
+swtc("fling enhancements",{ {value=0,text="none"} },function(v) flingchangestate=v end)
+swtc("respawn tp",{ {value=3,text="hide body"} },function(v) respawntp=v end)
+swtc("new gui scripts",{ {value=true,text="disable"} },function(v) disguiscripts=v end)
+swtc("new character scripts",{ {value=true,text="disable"} },function(v) discharscripts=v end)
+swtc("breakjoints",{ {value=3,text="breakjoints"} },function(v) breakjointsmethod=v end)
+swtc("coregui death effect",{ {value=true,text="disable"} },function(v) hidedeatheffect=v end)
+swtc("set simulation radius",{ {value=true,text="yes"} },function(v) simrad=v end)
 
 local cg=FindFirstChildOfClass(game,"CoreGui")
 if pcall(GetChildren,cg) then
