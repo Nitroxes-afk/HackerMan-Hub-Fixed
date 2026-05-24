@@ -544,17 +544,18 @@ lbl("MyWorld was here")
 lbl("discord.gg/QMy5f6DrbH")
 
 
+local placeholders = true
+local highlightflingtargets = true
 local allowshiftlock = true
 local ctrltp = true
 local clickfling = true
-local placeholders = true
-local highlightflingtargets = false
-local discharscripts = true
-local flingchangestate = 0          -- 0 = none (what you want)
-local respawntp = 0                 -- stay at spawn
-local breakjointsmethod = 3         -- "breakjoints" (what you want)
+local flingchangestate = 0          -- 0 = none
+local respawntp = 3                 -- 3 = hide body
+local breakjointsmethod = 1         -- 1 = breakjoints + health
 local simrad = true
-local hidedeatheffect = true	
+local hidedeatheffect = true
+local discharscripts = true         -- disable new character scripts
+local disguiscripts = true	
 
 local c=nil
 local cons={}
@@ -7861,116 +7862,33 @@ insSet(btn("stop current script",stopreanimate),"TextColor3",c3(0.75,0,0))
 
 lbl("SETTINGS (REANIMATE TO APPLY)")
 
-swtc("client sided placeholders",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	placeholders=v
-end)
+-- DEFAULT / AUTO SETTINGS
+placeholders = false           -- changed to false
+highlightflingtargets = true
+allowshiftlock = true
+ctrltp = true
+clickfling = false             -- changed to false
+flingchangestate = 0           -- none
+respawntp = 3                  -- hide body
+discharscripts = true
+disguiscripts = true
+breakjointsmethod = 3          -- changed to "breakjoints" only
+hidedeatheffect = true
+simrad = true
 
-swtc("highlight fling targets",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	highlightflingtargets=v
-end)
-
-swtc("allow shiftlock",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	allowshiftlock=v
-end)
-
-swtc("ctrl click tp",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	ctrltp=v
-end)
-
-swtc("click fling",{
-	{value=true,text="yes"},
-	{value=false,text="no"}
-},function(v)
-	clickfling=v
-end)
-
-swtc("fling enhancements",{
-	{value=3,text="all"},
-	{value=1,text="changestate physics"},
-	{value=2,text="disable sitting"},
-	{value=0,text="none"},
-},function(v)
-	flingchangestate=v
-end)
-
-swtc("respawn tp",{
-	{value=3,text="hide body"},
-	{value=0,text="stay at spawn"},
-	{value=1,text="random tp close"},
-	{value=2,text="behind char"}
-},function(v)
-	respawntp=v
-end)
-
-local disguiscripts=nil
-swtc("new gui scripts",{
-	{value=true,text="disable"},
-	{value=false,text="keep"}
-},function(v)
-	disguiscripts=v
-end)
-Connect(insGet(pg,"DescendantAdded"),function(v)
-	if c and disguiscripts and IsA(v,"Script") then --mind Enum.RunContext.Client
-		insSet(v,"Disabled",true) 
-	end
-end)
-
-swtc("new character scripts",{
-	{value=function(v)
-		if IsA(v,"Script") then --mind Enum.RunContext.Client
-			insSet(v,"Disabled",true)
-		end
-	end,text="disable"},
-	{value=false,text="keep"}
-},function(v)
-	discharscripts=v
-end)
-
-if replicatesignal then
-	swtc("breakjoints",{
-		{value=4,text="serverbreakjoints"},
-		{value=1,text="breakjoints+health"},
-		{value=2,text="health or breakjoints"},
-		{value=3,text="breakjoints"}
-	},function(v)
-		breakjointsmethod=v
-	end)
-else
-	swtc("breakjoints",{
-		{value=1,text="breakjoints+health"},
-		{value=2,text="health or breakjoints"},
-		{value=3,text="breakjoints"}
-	},function(v)
-		breakjointsmethod=v
-	end)
-	lbl("serverbreakjoints unsupported")
-end
-
-swtc("coregui death effect",{
-	{value=true,text="disable"},
-	{value=false,text="dont modify"},
-},function(v)
-	hidedeatheffect=v
-end)
-
-swtc("set simulation radius",{
-	{value=true,text="yes"},
-	{value=false,text="no"},
-},function(v)
-	simrad=v
-end)
+-- Settings menu (with your new defaults selected)
+swtc("client sided placeholders",{ {value=false,text="no"}, {value=true,text="yes"} },function(v) placeholders=v end)
+swtc("highlight fling targets",{ {value=true,text="yes"}, {value=false,text="no"} },function(v) highlightflingtargets=v end)
+swtc("allow shiftlock",{ {value=true,text="yes"}, {value=false,text="no"} },function(v) allowshiftlock=v end)
+swtc("ctrl click tp",{ {value=true,text="yes"}, {value=false,text="no"} },function(v) ctrltp=v end)
+swtc("click fling",{ {value=false,text="no"}, {value=true,text="yes"} },function(v) clickfling=v end)
+swtc("fling enhancements",{ {value=0,text="none"} },function(v) flingchangestate=v end)
+swtc("respawn tp",{ {value=3,text="hide body"} },function(v) respawntp=v end)
+swtc("new gui scripts",{ {value=true,text="disable"} },function(v) disguiscripts=v end)
+swtc("new character scripts",{ {value=true,text="disable"} },function(v) discharscripts=v end)
+swtc("breakjoints",{ {value=3,text="breakjoints"} },function(v) breakjointsmethod=v end)
+swtc("coregui death effect",{ {value=true,text="disable"} },function(v) hidedeatheffect=v end)
+swtc("set simulation radius",{ {value=true,text="yes"} },function(v) simrad=v end)
 
 local cg=FindFirstChildOfClass(game,"CoreGui")
 if pcall(GetChildren,cg) then
