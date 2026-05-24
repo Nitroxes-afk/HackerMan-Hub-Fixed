@@ -23509,22 +23509,6 @@ insSet(btn("stop current script",stopreanimate),"TextColor3",c3(0.75,0,0))
 
 lbl("SETTINGS (REANIMATE TO APPLY)")
 
--- Default settings applied automatically
-placeholders = true
-highlightflingtargets = true
-allowshiftlock = true
-ctrltp = true
-clickfling = true
-flingchangestate = 0        -- none
-respawntp = 3               -- hide body
-discharscripts = true
-disguiscripts = true
-breakjointsmethod = 1       -- breakjoints + health
-hidedeatheffect = true
-simrad = true
-
-lbl("SETTINGS (REANIMATE TO APPLY)")
-
 -- DEFAULT / AUTO SETTINGS
 placeholders = false           -- changed to false
 highlightflingtargets = true
